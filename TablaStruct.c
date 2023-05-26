@@ -257,6 +257,7 @@ void StartJoc(Block** table, double* HighScore1, double* HighScore2, double* Hig
         printf("To reveal write: x y R\nTo flag write: x y F\nTo unflag write: x y U\nTo reveal all neighbour blocks of a block write: x y A\nTo exit write: Exit\n");
         scanf("%s", comanda);
         if (strcmp(comanda, "Exit") == 0) {
+            printMinesRevealed(table, rows, cols);
             freeTable(table, rows);
             return;
         }
@@ -282,10 +283,12 @@ void StartJoc(Block** table, double* HighScore1, double* HighScore2, double* Hig
                         break;
                     }
                     Reveal(table, rows, cols, x, y);
-                    ok = CheckWin(table, rows, cols, mines);
-                    if (ok == 1)
-                        break;
+                } else {
+                    printf("Invalid option");
                 }
+                ok = CheckWin(table, rows, cols, mines);
+                if (ok == 1)
+                    break;
             }
         }
     }
